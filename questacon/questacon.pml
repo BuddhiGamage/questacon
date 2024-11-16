@@ -19,6 +19,9 @@
         <BehaviorDescription name="behavior" src="confused" xar="behavior.xar" />
         <BehaviorDescription name="behavior" src="bored" xar="behavior.xar" />
         <BehaviorDescription name="behavior" src="stand" xar="behavior.xar" />
+        <BehaviorDescription name="behavior" src="eyes" xar="behavior.xar" />
+        <BehaviorDescription name="behavior" src="eyes_red" xar="behavior.xar" />
+        <BehaviorDescription name="behavior" src="eyes_green" xar="behavior.xar" />
     </BehaviorDescriptions>
     <Dialogs />
     <Resources>
