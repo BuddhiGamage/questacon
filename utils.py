@@ -30,7 +30,8 @@ def get_tags_list():
         "fp": "facepalm",
         "red": "eyes_red",
         "con": "confused",
-        "eyes":"eyes"
+        "eyes":"eyes",
+        "point":"point"
     }
 
     # Map the tags to their categories
