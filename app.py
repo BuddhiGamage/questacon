@@ -1,5 +1,7 @@
 import streamlit as st
 from connection import Connection
+import random
+import time
 # ip='172.16.35.227' # questacon ip
 
 # Play an animation
@@ -7,22 +9,32 @@ def animation(button_name):
     st.session_state.behavior_mng_service.stopAllBehaviors()
     st.session_state.behavior_mng_service.startBehavior("questacon/"+button_name)
 
+# Function to play a random animation
+def play_random_animation():
+    animations = ["space_and_time", "self_and_others", "affirmation"]
+    selected_animation = random.choice(animations)
+    animation(selected_animation)  # Call your animation function here
+    time.sleep(2)  # Wait for 2 seconds
+
 #creating the connection
 if 'pepper' not in st.session_state:
     st.session_state.pepper = Connection()
     ip='localhost'
     # ip='127.0.0.1'
-    # port=44381
-    ip='10.0.0.244'
+    port=43769
+    # ip='10.0.0.244'
     # ip='172.16.35.227' # questacon ip
     # ip='172.20.10.4'
     # ip='192.168.1.53'
-    port=9559
+    # port=9559
     st.session_state.session = st.session_state.pepper.connect(ip, port)
 
     # Create a proxy to the AL services
     st.session_state.behavior_mng_service = st.session_state.session.service("ALBehaviorManager")
     st.session_state.animation_player_service = st.session_state.session.service("ALAnimationPlayer")
+
+    # speaking button behavior
+    st.session_state.speaking=0
 
 # UI layout
 st.markdown("<h1 style='text-align: center;'>Questacon App</h1>", unsafe_allow_html=True)
@@ -136,3 +148,17 @@ with col3:
     if st.button("Bored"):
         animation("bored")
        #  st.success("Button pressed...")
+
+st.subheader("Pepper Speaking")
+
+col1, col2 = st.columns(2)
+
+with col1:   
+    if st.button("Start Speaking"):
+        st.session_state.speaking=1
+        while(st.session_state.speaking==1):
+            play_random_animation()
+
+with col2:
+    if st.button("Stop Speaking"):
+        st.session_state.speaking=0
