@@ -22,12 +22,12 @@ if 'pepper' not in st.session_state:
     st.session_state.pepper = Connection()
     ip='localhost'
     # ip='127.0.0.1'
-    # port=43769
-    ip='10.0.0.244'
+    port=45029
+    # ip='10.0.0.244'
     # ip='172.16.35.227' # questacon ip
     # ip='172.20.10.4'
     # ip='192.168.1.53'
-    port=9559
+    # port=9559
     st.session_state.session = st.session_state.pepper.connect(ip, port)
 
     # Create a proxy to the AL services
@@ -36,6 +36,7 @@ if 'pepper' not in st.session_state:
 
     # speaking button behavior
     st.session_state.speaking=0
+    st.session_state.start_time=0
 
     # Script button behavior
     st.session_state.line_count=0
@@ -161,10 +162,20 @@ col1, col2 = st.columns(2)
 
 with col1:
     #only 2 min speach. 
+    # if st.button("Start Speaking"):
+    #     st.session_state.speaking=1
+    #     while(st.session_state.speaking==1):
+    #         play_random_animation()
     if st.button("Start Speaking"):
-        st.session_state.speaking=1
-        while(st.session_state.speaking==1):
+        st.session_state.speaking = 1
+        st.session_state.start_time = time.time()  # Record the start time
+        while st.session_state.speaking == 1:
             play_random_animation()
+            if time.time() - st.session_state.start_time > 120:  # Stop after 2 minutes
+                st.session_state.speaking = 0
+                st.session_state.start_time=0
+                animation("stand")
+                break
 
 with col2:
     if st.button("Stop Speaking"):
