@@ -40,7 +40,8 @@ if 'pepper' not in st.session_state:
 
     # Script button behavior
     st.session_state.tag_list=get_tags_list()
-    st.session_state.line_count=len(st.session_state.tag_list)-1
+    # st.session_state.line_count=len(st.session_state.tag_list)-1
+    st.session_state.line_count=0
 
 
 # UI layout
