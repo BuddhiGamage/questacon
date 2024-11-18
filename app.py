@@ -10,18 +10,19 @@ def animation(button_name):
 #creating the connection
 if 'pepper' not in st.session_state:
     st.session_state.pepper = Connection()
-    # ip='localhost'
+    ip='localhost'
     # ip='127.0.0.1'
-    # port=42535
-    # ip='10.0.0.244'
-    ip='172.16.35.227' # questacon ip
-    ip='172.20.10.4'
+    # port=44381
+    ip='10.0.0.244'
+    # ip='172.16.35.227' # questacon ip
+    # ip='172.20.10.4'
     # ip='192.168.1.53'
     port=9559
     st.session_state.session = st.session_state.pepper.connect(ip, port)
 
     # Create a proxy to the AL services
     st.session_state.behavior_mng_service = st.session_state.session.service("ALBehaviorManager")
+    st.session_state.animation_player_service = st.session_state.session.service("ALAnimationPlayer")
 
 # UI layout
 st.markdown("<h1 style='text-align: center;'>Questacon App</h1>", unsafe_allow_html=True)
@@ -91,6 +92,8 @@ with col2:
     if st.button("Enumeration"):
         animation("enumeration")
        #  st.success("Button pressed...")
+    if st.button("Facepalm"):
+        animation("facepalm")
 
 
 st.subheader("Moods")

@@ -22,6 +22,7 @@
         <BehaviorDescription name="behavior" src="eyes" xar="behavior.xar" />
         <BehaviorDescription name="behavior" src="eyes_red" xar="behavior.xar" />
         <BehaviorDescription name="behavior" src="eyes_green" xar="behavior.xar" />
+        <BehaviorDescription name="behavior" src="facepalm" xar="behavior.xar" />
     </BehaviorDescriptions>
     <Dialogs />
     <Resources>
