@@ -6,8 +6,11 @@ This repository contains a Streamlit-based application designed for controlling 
 
 - **Behavior Control:** Start and stop a variety of animations on Pepper.
 - **Interactive UI:** Easy-to-use buttons for triggering different animation categories.
+  - **Eyes** Changin colours of eyes
   - **Dialog Animations:** Space & Time, Self & Others, Affirmation, etc.
   - **Moods:** Positive, Neutral, and Negative emotional states.
+  - **Pepper Speaking** Speaking behaviour
+  - **Script** Questacon script
 
 ## Requirements
 

@@ -12,7 +12,7 @@ def animation(button_name):
 
 # Function to play a random animation
 def play_random_animation():
-    animations = ["space_and_time", "self_and_others", "affirmation"]
+    animations = ["space_and_time", "self_and_others", "affirmation","exclamation"]
     selected_animation = random.choice(animations)
     animation(selected_animation)  # Call your animation function here
     time.sleep(2)  # Wait for 2 seconds
