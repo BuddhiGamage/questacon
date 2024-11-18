@@ -162,3 +162,4 @@ with col1:
 with col2:
     if st.button("Stop Speaking"):
         st.session_state.speaking=0
+        animation("stand")
