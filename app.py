@@ -222,3 +222,7 @@ with col3:
                 continue
             time.sleep(1.5)
         st.success("Line No: "+str(st.session_state.line_count+1))
+
+    if st.button("Reset"):
+        st.session_state.line_count=0
+        st.success("Reset to 1st")
