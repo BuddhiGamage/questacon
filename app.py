@@ -2,6 +2,7 @@ import streamlit as st
 from connection import Connection
 import random
 import time
+from utils import get_tags_list
 # ip='172.16.35.227' # questacon ip
 
 # Play an animation
@@ -21,12 +22,12 @@ if 'pepper' not in st.session_state:
     st.session_state.pepper = Connection()
     ip='localhost'
     # ip='127.0.0.1'
-    port=43769
-    # ip='10.0.0.244'
+    # port=43769
+    ip='10.0.0.244'
     # ip='172.16.35.227' # questacon ip
     # ip='172.20.10.4'
     # ip='192.168.1.53'
-    # port=9559
+    port=9559
     st.session_state.session = st.session_state.pepper.connect(ip, port)
 
     # Create a proxy to the AL services
@@ -35,6 +36,11 @@ if 'pepper' not in st.session_state:
 
     # speaking button behavior
     st.session_state.speaking=0
+
+    # Script button behavior
+    st.session_state.line_count=0
+    st.session_state.tag_list=get_tags_list()
+
 
 # UI layout
 st.markdown("<h1 style='text-align: center;'>Questacon App</h1>", unsafe_allow_html=True)
@@ -153,7 +159,8 @@ st.subheader("Pepper Speaking")
 
 col1, col2 = st.columns(2)
 
-with col1:   
+with col1:
+    #only 2 min speach. 
     if st.button("Start Speaking"):
         st.session_state.speaking=1
         while(st.session_state.speaking==1):
@@ -163,3 +170,36 @@ with col2:
     if st.button("Stop Speaking"):
         st.session_state.speaking=0
         animation("stand")
+
+st.subheader("Script")
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    if st.button("Next"):
+        for tag in st.session_state.tag_list[st.session_state.line_count]:
+            animation(tag)
+            if not (tag=='eyes_green') or not tag=='eyes_red':
+                time.sleep(1.5)
+        st.session_state.line_count+=1
+        st.success("Line No: "+str(st.session_state.line_count))
+    
+    if  st.session_state.line_count==28:
+        st.session_state.line_count=0
+
+with col3:
+    if st.button("Go to first"):
+        st.session_state.line_count=0
+        for tag in st.session_state.tag_list[st.session_state.line_count]:
+            animation(tag)
+            if not (tag=='eyes_green') or not tag=='eyes_red':
+                time.sleep(1.5)
+        st.session_state.line_count+=1
+        st.success("Line No: "+str(st.session_state.line_count))
+    if st.button("Previous"):
+        st.session_state.line_count-=1
+        for tag in st.session_state.tag_list[st.session_state.line_count]:
+            animation(tag)
+            if not (tag=='eyes_green') or not tag=='eyes_red':
+                time.sleep(1.5)
+        st.success("Line No: "+str(st.session_state.line_count))
