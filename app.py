@@ -7,32 +7,40 @@ from utils import get_tags_list
 
 # Play an animation
 def animation(button_name):
-    st.session_state.behavior_mng_service.stopAllBehaviors()
-    st.session_state.behavior_mng_service.startBehavior("questacon/"+button_name)
-
+    try:
+        st.session_state.behavior_mng_service.stopAllBehaviors()
+        st.session_state.behavior_mng_service.startBehavior("questacon/"+button_name)
+    except RuntimeError as e:
+        st.error("Got runtime error as: {e}\nTry to reconnect")
 # Function to play a random animation
 def play_random_animation():
     animations = ["space_and_time", "self_and_others", "affirmation","exclamation"]
     selected_animation = random.choice(animations)
     animation(selected_animation)  # Call your animation function here
-    time.sleep(2)  # Wait for 2 seconds
+    time.sleep(st.session_state.anim_time)  # Wait for few seconds
 
-#creating the connection
-if 'pepper' not in st.session_state:
+def pepper_reconnect(ip,port=9559):
     st.session_state.pepper = Connection()
-    ip='localhost'
-    # ip='127.0.0.1'
-    port=45029
-    # ip='10.0.0.244'
-    # ip='172.16.35.227' # questacon ip
-    # ip='172.20.10.4'
-    # ip='192.168.1.53'
-    # port=9559
     st.session_state.session = st.session_state.pepper.connect(ip, port)
 
     # Create a proxy to the AL services
     st.session_state.behavior_mng_service = st.session_state.session.service("ALBehaviorManager")
-    st.session_state.animation_player_service = st.session_state.session.service("ALAnimationPlayer")
+
+#creating the connection
+if 'pepper' not in st.session_state:
+    st.session_state.pepper = Connection()
+    st.session_state.ip='localhost'
+    # st.session_state.ip='127.0.0.1'
+    # port=45029
+    st.session_state.ip='10.0.0.244'
+    # st.session_state.ip='172.16.35.227' # questacon ip
+    # st.session_state.ip='172.20.10.4'
+    # st.session_state.ip='192.168.254.40'
+    port=9559
+    st.session_state.session = st.session_state.pepper.connect(st.session_state.ip, port)
+
+    # Create a proxy to the AL services
+    st.session_state.behavior_mng_service = st.session_state.session.service("ALBehaviorManager")
 
     # speaking button behavior
     st.session_state.speaking=0
@@ -42,6 +50,7 @@ if 'pepper' not in st.session_state:
     st.session_state.tag_list=get_tags_list()
     # st.session_state.line_count=len(st.session_state.tag_list)-1
     st.session_state.line_count=0
+    st.session_state.anim_time=1.8    #single animation play time
 
 
 # UI layout
@@ -195,7 +204,7 @@ with col1:
             animation(tag)
             if tag in eyes_tags:
                 continue
-            time.sleep(1.5)
+            time.sleep(st.session_state.anim_time)
         st.session_state.line_count+=1
         st.success("Line No: "+str(st.session_state.line_count))
     
@@ -209,7 +218,7 @@ with col3:
             animation(tag)
             if tag in eyes_tags:
                 continue
-            time.sleep(1.5)
+            time.sleep(st.session_state.anim_time)
         st.session_state.line_count+=1
         st.success("Line No: "+str(st.session_state.line_count))
 
@@ -221,9 +230,24 @@ with col3:
             animation(tag)
             if tag in eyes_tags:
                 continue
-            time.sleep(1.5)
+            time.sleep(st.session_state.anim_time)
         st.success("Line No: "+str(st.session_state.line_count+1))
 
     if st.button("Reset"):
         st.session_state.line_count=0
         st.success("Reset to 1st")
+
+st.subheader("Reconnect")
+col1, col2 = st.columns([3,1])
+
+with col1:
+    ip_value = st.text_input("Ip:", key='ip_value',value=st.session_state.ip)
+    port_value = st.text_input("Port:", value=9559,key='port_value', max_chars=5)
+
+with col2:
+    st.write("")
+    st.write("")
+    st.write("")
+    if st.button("Reconnect"):
+        pepper_reconnect(ip_value,port_value)
+        # st.session_state.port_value = '9559'
