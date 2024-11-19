@@ -32,18 +32,21 @@ def set_line_count():
 #creating the connection
 if 'pepper' not in st.session_state:
     st.session_state.pepper = Connection()
-    st.session_state.ip='localhost'
+    # st.session_state.ip='localhost'
     # st.session_state.ip='127.0.0.1'
     # port=45029
-    st.session_state.ip='10.0.0.244'
-    # st.session_state.ip='172.16.35.227' # questacon ip
+    # st.session_state.ip='10.0.0.244'
+    st.session_state.ip='172.16.35.227' # questacon ip
     # st.session_state.ip='172.20.10.4'
-    st.session_state.ip='192.168.254.40'
+    # st.session_state.ip='192.168.254.40'
     port=9559
     st.session_state.session = st.session_state.pepper.connect(st.session_state.ip, port)
 
     # Create a proxy to the AL services
     st.session_state.behavior_mng_service = st.session_state.session.service("ALBehaviorManager")
+
+    # Sleep button behaviour
+    st.session_state.sleep_state=0
 
     # speaking button behavior
     st.session_state.speaking=0
@@ -54,7 +57,7 @@ if 'pepper' not in st.session_state:
     # st.session_state.line_count=len(st.session_state.tag_list)-1
     st.session_state.line_count=0
     # st.session_state.line_value=0
-    st.session_state.anim_time=1.8    #single animation play time
+    st.session_state.anim_time=1.2    #single animation play time
 
 
 # UI layout
@@ -67,9 +70,12 @@ with col1:
 with col2:
     st.write("")
     st.write("")
-    st.write("")
+    if st.button("Sleep"):
+        st.session_state.sleep_state=1
+        animation('sleep')
     if st.button("\nStop Animation\n", type="primary"):  # Create the button
         st.session_state.behavior_mng_service.stopAllBehaviors()
+        st.session_state.sleep_state=0
         animation("stand")
        #  st.success("Button pressed...")
 # Apply CSS to ensure buttons have the same width

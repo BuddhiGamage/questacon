@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<package version="0.0.0" uuid="questacon">
+<package uuid="questacon" version="0.0.0">
  <names>
   <name lang="en_US">questacon</name>
  </names>
@@ -23,9 +23,6 @@
   </behaviorContent>
   <behaviorContent path="affirmation">
    <nature>interactive</nature>
-   <triggerSentences/>
-   <loadingResponses/>
-   <autonomous/>
    <permissions/>
   </behaviorContent>
   <behaviorContent path="negation">
@@ -101,6 +98,10 @@
    <permissions/>
   </behaviorContent>
   <behaviorContent path="point">
+   <nature>interactive</nature>
+   <permissions/>
+  </behaviorContent>
+  <behaviorContent path="sleep">
    <nature>interactive</nature>
    <permissions/>
   </behaviorContent>
