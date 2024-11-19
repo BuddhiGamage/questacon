@@ -12,6 +12,9 @@
  <contents>
   <behaviorContent path="space_and_time">
    <nature>interactive</nature>
+   <triggerSentences/>
+   <loadingResponses/>
+   <autonomous/>
    <permissions/>
   </behaviorContent>
   <behaviorContent path="self_and_others">
@@ -20,6 +23,9 @@
   </behaviorContent>
   <behaviorContent path="affirmation">
    <nature>interactive</nature>
+   <triggerSentences/>
+   <loadingResponses/>
+   <autonomous/>
    <permissions/>
   </behaviorContent>
   <behaviorContent path="negation">
@@ -91,6 +97,10 @@
    <permissions/>
   </behaviorContent>
   <behaviorContent path="facepalm">
+   <nature>interactive</nature>
+   <permissions/>
+  </behaviorContent>
+  <behaviorContent path="point">
    <nature>interactive</nature>
    <permissions/>
   </behaviorContent>

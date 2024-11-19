@@ -11,7 +11,7 @@ def animation(button_name):
         st.session_state.behavior_mng_service.stopAllBehaviors()
         st.session_state.behavior_mng_service.startBehavior("questacon/"+button_name)
     except RuntimeError as e:
-        st.error("Got runtime error as: {e}\nTry to reconnect")
+        st.error(f"Got runtime error as: {e}\nTry to reconnect")
 # Function to play a random animation
 def play_random_animation():
     animations = ["space_and_time", "self_and_others", "affirmation","exclamation"]
@@ -26,6 +26,9 @@ def pepper_reconnect(ip,port=9559):
     # Create a proxy to the AL services
     st.session_state.behavior_mng_service = st.session_state.session.service("ALBehaviorManager")
 
+def set_line_count():
+    st.session_state.line_count=int(st.session_state.line_value)-1
+
 #creating the connection
 if 'pepper' not in st.session_state:
     st.session_state.pepper = Connection()
@@ -35,7 +38,7 @@ if 'pepper' not in st.session_state:
     st.session_state.ip='10.0.0.244'
     # st.session_state.ip='172.16.35.227' # questacon ip
     # st.session_state.ip='172.20.10.4'
-    # st.session_state.ip='192.168.254.40'
+    st.session_state.ip='192.168.254.40'
     port=9559
     st.session_state.session = st.session_state.pepper.connect(st.session_state.ip, port)
 
@@ -50,6 +53,7 @@ if 'pepper' not in st.session_state:
     st.session_state.tag_list=get_tags_list()
     # st.session_state.line_count=len(st.session_state.tag_list)-1
     st.session_state.line_count=0
+    # st.session_state.line_value=0
     st.session_state.anim_time=1.8    #single animation play time
 
 
@@ -243,6 +247,7 @@ col1, col2 = st.columns([3,1])
 with col1:
     ip_value = st.text_input("Ip:", key='ip_value',value=st.session_state.ip)
     port_value = st.text_input("Port:", value=9559,key='port_value', max_chars=5)
+    line_value = st.text_input("Line:", value=st.session_state.line_count,key='line_value', max_chars=2,on_change=set_line_count)
 
 with col2:
     st.write("")
@@ -250,4 +255,5 @@ with col2:
     st.write("")
     if st.button("Reconnect"):
         pepper_reconnect(ip_value,port_value)
+        st.session_state.line_count=st.session_state.line_value
         # st.session_state.port_value = '9559'
