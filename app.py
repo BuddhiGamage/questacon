@@ -221,6 +221,8 @@ with col1:
         if  st.session_state.line_count==28:
             st.session_state.line_count=0
 
+    if st.button("Transition"):
+        animation('transition')
 with col3:
     if st.button("Go to first"):
         st.session_state.line_count=0

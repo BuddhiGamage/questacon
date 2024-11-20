@@ -31,7 +31,8 @@ def get_tags_list():
         "red": "eyes_red",
         "con": "confused",
         "eyes":"eyes",
-        "point":"point"
+        "point":"point",
+        "transition":"transition"
     }
 
     # Map the tags to their categories
