@@ -14,7 +14,7 @@ def animation(button_name):
         st.error(f"Got runtime error as: {e}\nTry to reconnect")
 # Function to play a random animation
 def play_random_animation():
-    animations = ["space_and_time", "self_and_others", "affirmation","exclamation"]
+    animations = ["space_and_time", "self_and_others", "affirmation","exclamation","enumeration"]
     selected_animation = random.choice(animations)
     animation(selected_animation)  # Call your animation function here
     time.sleep(st.session_state.anim_time)  # Wait for few seconds
