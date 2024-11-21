@@ -34,7 +34,7 @@ if 'pepper' not in st.session_state:
     st.session_state.pepper = Connection()
     # st.session_state.ip='localhost'
     # st.session_state.ip='127.0.0.1'
-    # port=45029
+    # port=39673
     # st.session_state.ip='10.0.0.244'
     st.session_state.ip='172.16.35.227' # questacon ip
     # st.session_state.ip='172.20.10.4'
@@ -151,6 +151,8 @@ with col1:
     if st.button("Excited"):
         animation("excited")
        #  st.success("Button pressed...")
+    if st.button("Wave"):
+        animation('wave')
 
 with col2:
     st.markdown("<h3 style='text-align: center;'>Neutral</h3>", unsafe_allow_html=True)
