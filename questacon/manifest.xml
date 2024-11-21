@@ -12,9 +12,6 @@
  <contents>
   <behaviorContent path="space_and_time">
    <nature>interactive</nature>
-   <triggerSentences/>
-   <loadingResponses/>
-   <autonomous/>
    <permissions/>
   </behaviorContent>
   <behaviorContent path="self_and_others">
@@ -107,9 +104,6 @@
   </behaviorContent>
   <behaviorContent path="transition">
    <nature>interactive</nature>
-   <triggerSentences/>
-   <loadingResponses/>
-   <autonomous/>
    <permissions/>
   </behaviorContent>
   <behaviorContent path="wave">

@@ -9,7 +9,7 @@
             <translation type="vanished">Hello</translation>
         </message>
         <message>
-            <location filename="../../../../../../../translations/wave/behavior.xar" line="0"/>
+            <location filename="../../../../../../../../../../../../../translations/wave/behavior.xar" line="0"/>
             <source></source>
             <comment>Text</comment>
             <translation></translation>
