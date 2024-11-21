@@ -26,6 +26,7 @@
         <BehaviorDescription name="behavior" src="point" xar="behavior.xar" />
         <BehaviorDescription name="behavior" src="sleep" xar="behavior.xar" />
         <BehaviorDescription name="behavior" src="transition" xar="behavior.xar" />
+        <BehaviorDescription name="behavior" src="wave" xar="behavior.xar" />
     </BehaviorDescriptions>
     <Dialogs />
     <Resources>

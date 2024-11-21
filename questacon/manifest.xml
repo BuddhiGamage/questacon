@@ -107,6 +107,13 @@
   </behaviorContent>
   <behaviorContent path="transition">
    <nature>interactive</nature>
+   <triggerSentences/>
+   <loadingResponses/>
+   <autonomous/>
+   <permissions/>
+  </behaviorContent>
+  <behaviorContent path="wave">
+   <nature>interactive</nature>
    <permissions/>
   </behaviorContent>
  </contents>
