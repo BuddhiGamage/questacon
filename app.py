@@ -5,13 +5,27 @@ import time
 from utils import get_tags_list
 # ip='172.16.35.227' # questacon ip
 
+st.session_state.loop_animation=True
+
 # Play an animation
 def animation(button_name):
-    try:
-        st.session_state.behavior_mng_service.stopAllBehaviors()
-        st.session_state.behavior_mng_service.startBehavior("questacon/"+button_name)
-    except RuntimeError as e:
-        st.error(f"Got runtime error as: {e}\nTry to reconnect")
+    if (st.session_state.loop_animation):
+        st.session_state.start_time = time.time()  # Record the start time
+        while True:
+            st.session_state.behavior_mng_service.stopAllBehaviors()
+            st.session_state.behavior_mng_service.startBehavior("questacon/"+button_name)
+            time.sleep(st.session_state.anim_time)  # Wait for few seconds
+            if time.time() - st.session_state.start_time > 120:  # Stop after 2 minutes
+                st.session_state.speaking = 0
+                st.session_state.start_time=0
+                animation("stand")
+                break
+    else:
+        try:
+            st.session_state.behavior_mng_service.stopAllBehaviors()
+            st.session_state.behavior_mng_service.startBehavior("questacon/"+button_name)
+        except RuntimeError as e:
+            st.error(f"Got runtime error as: {e}\nTry to reconnect")
 # Function to play a random animation
 def play_random_animation():
     animations = ["space_and_time", "self_and_others", "affirmation","exclamation","enumeration"]
