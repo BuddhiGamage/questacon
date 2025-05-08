@@ -97,7 +97,7 @@ if 'pepper' not in st.session_state:
     # st.session_state.line_count=len(st.session_state.tag_list)-1
     st.session_state.line_count=0
     # st.session_state.line_value=0
-    st.session_state.anim_time=1.5    #single animation play time
+    st.session_state.anim_time=2    #single animation play time
 
 
 # UI layout
