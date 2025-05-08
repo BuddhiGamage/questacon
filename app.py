@@ -23,27 +23,30 @@ def animation(button_name):
     if (st.session_state.loop_animation):
         if (button_name not in animations):        
             while True:
-                st.session_state.behavior_mng_service.stopAllBehaviors()
-                st.session_state.behavior_mng_service.startBehavior("questacon/"+button_name)
-                time.sleep(st.session_state.anim_time)  # Wait for few seconds
-                if time.time() - st.session_state.start_time > 120:  # Stop after 2 minutes
-                    st.session_state.start_time=0
-                    animation("stand")
-                    break
-        else:
+                try:
+                    st.session_state.behavior_mng_service.stopAllBehaviors()
+                    st.session_state.behavior_mng_service.startBehavior("questacon/"+button_name)
+                    time.sleep(st.session_state.anim_time)  # Wait for few seconds
+                    if time.time() - st.session_state.start_time > 120:  # Stop after 2 minutes
+                        st.session_state.start_time=0
+                        animation("stand")
+                        break
+                except RuntimeError as e:
+                    st.error(f"Got runtime error as: {e}\nTry to reconnect")
+        elif button_name in animations:
             try:
                 st.session_state.behavior_mng_service.stopAllBehaviors()
                 st.session_state.behavior_mng_service.startBehavior("questacon/"+button_name)
-                if time.time() - st.session_state.start_time > 120:  # Stop after 2 minutes
-                    animation("stand")
+                time.sleep(120)  # Stop after 2 minutes
+                animation("stand")
             except RuntimeError as e:
                 st.error(f"Got runtime error as: {e}\nTry to reconnect")
     else:
         try:
             st.session_state.behavior_mng_service.stopAllBehaviors()
             st.session_state.behavior_mng_service.startBehavior("questacon/"+button_name)
-            if time.time() - st.session_state.start_time > 2:  # Stop after 2 sec
-                animation("stand")
+            time.sleep(st.session_state.anim_time)
+            animation("stand")
         except RuntimeError as e:
             st.error(f"Got runtime error as: {e}\nTry to reconnect")
 # Function to play a random animation
