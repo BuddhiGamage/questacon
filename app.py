@@ -49,8 +49,8 @@ if 'pepper' not in st.session_state:
     # st.session_state.ip='localhost'
     # st.session_state.ip='127.0.0.1'
     # port=39673
-    # st.session_state.ip='10.0.0.244'
-    st.session_state.ip='172.16.35.227' # questacon ip
+    st.session_state.ip='10.0.0.244'
+    # st.session_state.ip='172.16.35.227' # questacon ip
     # st.session_state.ip='172.20.10.4'
     # st.session_state.ip='192.168.254.40'
     port=9559
