@@ -5,7 +5,10 @@ import time
 from utils import get_tags_list
 # ip='172.16.35.227' # questacon ip
 
-st.session_state.loop_animation=True
+
+
+
+
 
 # Play an animation
 def animation(button_name):
@@ -124,6 +127,20 @@ st.markdown("""
     }
     </style>
     """, unsafe_allow_html=True)
+
+# Radio button with two options
+st.subheader("Looping")
+option = st.radio(
+    "Select option:",
+    ("Enable", "Disable")
+)
+
+if (option=="Enable"):
+    st.session_state.loop_animation=True
+    animation("stand")
+else:
+    st.session_state.loop_animation=False
+    animation("stand")
 
 st.subheader("Eyes")
 col1, col2, col3 = st.columns(3)
